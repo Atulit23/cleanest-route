@@ -399,25 +399,25 @@
 
           var routeCoordinates = [];
           console.log(data.paths);
-          let allCoordinates = data.paths.map(
-            (item) => item.points.coordinates
-          );
-          console.log(allCoordinates);
-          let aqis = await Promise.all(
-            allCoordinates.map(async (elem) => {
-              let coordsToGive = elem[Math.floor(elem.length / 2)];
-              const url = `http://api.airvisual.com/v2/nearest_city?lat=${coordsToGive[1]}&lon=${coordsToGive[0]}&key=fb6f857c-8331-443f-8c7f-1aa127b66770`;
-              const response = await fetch(url);
-              const res = await response.json();
-              return res.data.current.pollution.aqius;
-            })
-          );
+          // let allCoordinates = data.paths.map(
+          //   (item) => item.points.coordinates
+          // );
+          // console.log(allCoordinates);
+          // let aqis = await Promise.all(
+          //   allCoordinates.map(async (elem) => {
+          //     let coordsToGive = elem[Math.floor(elem.length / 2)];
+          //     const url = `http://api.airvisual.com/v2/nearest_city?lat=${coordsToGive[1]}&lon=${coordsToGive[0]}&key=fb6f857c-8331-443f-8c7f-1aa127b66770`;
+          //     const response = await fetch(url);
+          //     const res = await response.json();
+          //     return res.data.current.pollution.aqius;
+          //   })
+          // );
 
-          //   console.log("AQIs:", aqis);
+          // //   console.log("AQIs:", aqis);
 
-          let maxIndex = findMaxIndex(aqis);
+          // let maxIndex = findMaxIndex(aqis);
           // routeCoordinates = allCoordinates[maxIndex];
-          routeCoordinates = allCoordinates[0];
+          routeCoordinates = data.paths[0].points.coordinates;
 
           var routeLine = new ol.geom.LineString(routeCoordinates);
           routeLine.transform("EPSG:4326", "EPSG:3857");
