@@ -416,7 +416,8 @@
           //   console.log("AQIs:", aqis);
 
           let maxIndex = findMaxIndex(aqis);
-          routeCoordinates = allCoordinates[maxIndex];
+          // routeCoordinates = allCoordinates[maxIndex];
+          routeCoordinates = allCoordinates[0];
 
           var routeLine = new ol.geom.LineString(routeCoordinates);
           routeLine.transform("EPSG:4326", "EPSG:3857");
